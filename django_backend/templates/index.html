@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block head_title %}Home | {{block.super}}{% endblock head_title %}
+
+
+{% block content %}
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Dashboard</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item active">Welcome to Dashboard</li>
+                    </ol>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end page title -->
+
+    <div class="row">
+
+        <div class="col-xl-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card mini-stats-wid">
+                        <div class="card-body">
+                            <div class="media">
+                                <div class="media-body">
+                                    <p class="text-muted font-weight-medium">Users</p>
+                                    <h4 class="mb-0">{{ users_number }}</h4>
+                                </div>
+
+                                <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                    <span class="avatar-title">
+                                        <i class="bx bx-user font-size-24"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card mini-stats-wid">
+                        <div class="card-body">
+                            <div class="media">
+                                <div class="media-body">
+                                    <p class="text-muted font-weight-medium">Outlets</p>
+                                    <h4 class="mb-0">{{ outlets_number }}</h4>
+                                </div>
+
+                                <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
+                                    <span class="avatar-title rounded-circle bg-primary">
+                                        <i class="bx bx-fridge font-size-24"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card mini-stats-wid">
+                        <div class="card-body">
+                            <div class="media">
+                                <div class="media-body">
+                                    <p class="text-muted font-weight-medium">Products</p>
+                                    <h4 class="mb-0">{{ products_number }}</h4>
+                                </div>
+
+                                <div class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
+                                    <span class="avatar-title">
+                                        <i class="bx bx-package font-size-24"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card mini-stats-wid">
+                        <div class="card-body">
+                            <div class="media">
+                                <div class="media-body">
+                                    <p class="text-muted font-weight-medium">Audits</p>
+                                    <h4 class="mb-0">{{ audits_number }}</h4>
+                                </div>
+
+                                <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
+                                    <span class="avatar-title rounded-circle bg-primary">
+                                        <i class="bx bx-data font-size-24"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div>
+    </div>
+    <!-- end row -->
+
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="card-title mb-4">The last audits</h4>
+
+                    <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width: 100px">Outlet</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Measure</th>
+                            <th scope="col">Auditor</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for audit in audits %}
+                            <tr>
+                                <td>
+                                    <h5 class="text-truncate font-size-14"><a href="#" class="text-dark">{{ audit.outlet.name }}</a></h5>
+                                </td>
+                                <td>
+                                    <p class="text-muted mb-0">{{ audit.product.name }}</p>
+                                </td>
+                                <td>
+                                    <p class="text-muted mb-0">{{ audit.price }}</p>
+                                </td>
+                                <td>
+                                    <p class="text-muted mb-0">{{ audit.measure }}</p>
+                                </td>
+                                <td>
+                                    {% if audit.user.photo %}
+                                        <div class="team">
+                                            <a href="#" class="team-member d-inline-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="Daniel Canales">
+                                                <img src="{{ audit.user.photo.url }}" class="rounded-circle avatar-xs m-1" alt="photo">
+                                            </a>
+                                        </div>
+                                    {% else %}
+                                        <p class="text-muted mb-0">{{ audit.user.user.first_name }}</p>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <p class="text-muted mb-0">{{ audit.created_at|date:"F j, Y" }}</p>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+      
+{% endblock %}

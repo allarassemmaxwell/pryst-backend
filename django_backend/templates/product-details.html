@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block head_title %}Profile | {{block.super}}{% endblock head_title %}
+
+
+{% block content %}
+
+
+<div class="page-content">
+    <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0 font-size-18">Product Detail</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="/">Deashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'main_app:product' %}">Product</a></li>
+                            <li class="breadcrumb-item active">Product Detail</li>
+                        </ol>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>     
+        <!-- end page title -->
+
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="product-detai-imgs">
+                                <div class="row">
+
+                                    <div class="col-md-7 offset-md-1 col-9">
+                                        <div class="tab-content" id="v-pills-tabContent">
+                                            
+                                            <div class="tab-pane fade show active" id="product-1" role="tabpanel" aria-labelledby="product-1-tab">
+                                                <div>
+                                                    {% if detail.image %}
+                                                        <img src="{{ detail.image.url }}" alt="" class="img-fluid mx-auto d-block">
+                                                    {% else %}
+                                                        <img src='{% static "assets/images/product/no-product.jpg" %}' alt="" class="img-fluid mx-auto d-block">
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6">
+                            <div class="mt-4 mt-xl-3">
+                                <a href="#" class="text-primary">Name</a>
+                                <h4 class="mt-1 mb-3">{{ detail.name }}</h4>
+                                <div class="text-muted font-size-12"><i class="far fa-calendar-alt text-primary mr-1"></i> {{ detail.created_at|date:"F j, Y" }}</div><br>
+                                <div class="table-responsive">
+                                    <table class="table mb-0 table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row" style="width: 150px;">Category</th>
+                                                <td>{{ detail.category }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Brand</th>
+                                                <td>{{ detail.model.brand }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Model</th>
+                                                <td>{{ detail.model }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Manifacturer</th>
+                                                <td>{{ detail.manifacturer }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Measure</th>
+                                                <td>{{ detail.measure }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+                    <div class="mt-5">
+                        <h5 class="mb-3">Content :</h5>
+
+                        <div class="table-responsive">
+                            {% if detail.content %}
+                                {{ detail.content|safe }}
+                                {% else %}
+                                Not content
+                            {% endif %}
+                        </div>
+                    </div>
+                    <!-- end Specifications -->
+                </div>
+            </div>
+            <!-- end card -->
+        </div>
+        <!-- end row -->
+
+    </div> <!-- container-fluid -->
+</div>
+
+
+{% endblock %}

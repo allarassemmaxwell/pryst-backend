@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block head_title %}Edit Audit | {{block.super}}{% endblock head_title %}
+
+
+{% block content %}
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0 font-size-18">Edit Audit</h4>
+    
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'main_app:audit' %}">Audits</a></li>
+                            <li class="breadcrumb-item active">Edit Audit</li>
+                        </ol>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>     
+        <!-- end page title -->
+
+        
+
+        <div class="checkout-tabs">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-shipping" role="tabpanel" aria-labelledby="v-pills-shipping-tab">
+                                    <div>
+                                        <h4 class="card-title">Audit information</h4>
+                                        <p class="card-title-desc">Fill all information below</p>
+                                        <form class="audit-edit-form" method="POST" action="">{% csrf_token %}
+
+                                            <div class="form-group row mb-4">
+                                                <label class="col-md-2 col-form-label">Outlet</label>
+                                                <div class="col-md-10">
+                                                    <select class="form-control select2" title="outlet" name="outlet_slug">
+                                                        <option value="">Select</option>
+                                                        {% for outlet in outlets %}
+                                                            <option value="{{ outlet.slug }}" {% if outlet.slug == data.outlet.slug %} selected="selected" {% endif %}>{{ outlet.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-4">
+                                                <label class="col-md-2 col-form-label">Product</label>
+                                                <div class="col-md-10">
+                                                    <select class="form-control select2" title="Country" name="product_slug">
+                                                        <option value="">Select</option>
+                                                        {% for product in products %}
+                                                            <option value="{{ product.slug }}" {% if product.slug == data.product.slug %} selected="selected" {% endif %}>{{ product.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row mb-4">
+                                                <label class="col-md-2 col-form-label">User</label>
+                                                <div class="col-md-10">
+                                                    <select class="form-control select2" title="Country" name="user">
+                                                        <option value="">Select</option>
+                                                        {% for user in users %}
+                                                            <option value="{{ user.email }}" {% if user.email == data.user.user.email %} selected="selected" {% endif %}>{{ user.first_name }} {{ user.last_name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-4">
+                                                <label for="billing-name" class="col-md-2 col-form-label">Price</label>
+                                                <div class="col-md-10">
+                                                    <input type="number" value="{{ data.price }}" class="form-control" id="price" name="price" placeholder="Price">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-4">
+                                                <label for="billing-name" class="col-md-2 col-form-label">Measure</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" value="{{ data.measure }}" class="form-control" id="measure" name="measure" placeholder="Measure">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row mb-4">
+                                                <label for="billing-name" class="col-md-2 col-form-label"></label>
+                                                <div class="col-md-12">
+                                                    <button class="btn btn-danger mr-1 waves-effect waves-light">
+                                                        <a href="{% url 'main_app:audit-delete' data.slug %}" style="color: white;">Delete Audit</a>
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary mr-1 waves-effect waves-light">Save Audit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+    
+                            
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+
+{% endblock %}
+

@@ -1,0 +1,198 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+    
+<head>
+        <meta charset="utf-8" />
+        <title>{% block head_title %}Prystins Insights{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href='{% static "assets/images/icon.png" %}'>
+
+        <!-- Bootstrap Css -->
+        <link href='{% static "assets/css/bootstrap.min.css" %}' id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href='{% static "assets/css/icons.min.css" %}' rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href='{% static "assets/css/app.min.css" %}' id="app-style" rel="stylesheet" type="text/css" />
+
+
+        <!-- IMPORT JQUERY -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+        
+        <link href='{% static "assets/libs/select2/css/select2.min.css" %}' rel="stylesheet" type="text/css" />
+        <link href='{% static "assets/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" %}' rel="stylesheet">
+        <link href='{% static "assets/libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" %}' rel="stylesheet">
+        <link href='{% static "assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" %}' rel="stylesheet" />
+
+        <!-- DataTables -->
+        <link href='{% static "assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" %}' rel="stylesheet" type="text/css" />
+        <link href='{% static "assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" %}' rel="stylesheet" type="text/css" />
+
+        <!-- Responsive datatable examples -->
+        <link href='{% static "assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" %}' rel="stylesheet" type="text/css" />     
+    </head>
+
+    <body data-sidebar="dark">
+
+
+
+        <!-- Loader -->
+        <div id="preloader">
+            <div id="status">
+                <div class="spinner-chase">
+                    <div class="chase-dot"></div>
+                    <div class="chase-dot"></div>
+                    <div class="chase-dot"></div>
+                    <div class="chase-dot"></div>
+                    <div class="chase-dot"></div>
+                    <div class="chase-dot"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            {% block header %}
+        	    {% include 'header.html' %}
+            {% endblock %}
+  
+
+
+            <div class="main-content">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class='alert 
+                                    {% if "success" in message.tags %}alert-success{% elif "warning" in message.tags %}alert-warning{% elif "error" in message.tags %}alert-danger{% endif %} alert-dismissible' role="alert">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    {% if "safe" in message.tags %}
+                                        {{ message|safe }}
+                                    {% else %}
+                                        {{ message }} 
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+
+                        {% block content %}
+                        {% endblock %}
+                        
+                        {% block footer %}
+                        {% include 'footer.html' %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+
+
+        
+        <!-- JAVASCRIPT -->
+        <script src='{% static "assets/libs/jquery/jquery.min.js" %}'></script>
+        <script src='{% static "assets/libs/bootstrap/js/bootstrap.bundle.min.js" %}'></script>
+        <script src='{% static "assets/libs/metismenu/metisMenu.min.js" %}'></script>
+        <script src='{% static "assets/libs/simplebar/simplebar.min.js" %}'></script>
+        <script src='{% static "assets/libs/node-waves/waves.min.js" %}'></script>
+
+        <!-- apexcharts -->
+        <script src='{% static "assets/libs/apexcharts/apexcharts.min.js" %}'></script>
+        <script src='{% static "assets/js/pages/dashboard.init.js" %}'></script>
+        <script src='{% static "assets/js/pages/profile.init.js" %}'></script>
+        <script src='{% static "assets/js/app.js" %}'></script>
+
+        <!-- IMPORT JQUERY VALIDATION -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+        
+        <script src='{% static "assets/js/validation.js" %}'></script>
+
+
+        <!-- google maps api -->
+        <script src="https://maps.google.com/maps/api/js?key=AIzaSyCtSAR45TFgZjOs4nBFFZnII-6mMHLfSYI"></script>
+        <!-- Gmaps file -->
+        <script src='{% static "assets/libs/gmaps/gmaps.min.js" %}'></script>
+        <!-- demo codes -->
+        <script src='{% static "assets/js/pages/gmaps.init.js" %}'></script>  
+        
+
+        <!-- Plugins js-->
+        <script src='{% static "assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js" %}'></script>
+        <script src='{% static "assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js" %}'></script>
+        <script src='{% static "assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js" %}'></script>
+        <script src='{% static "assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-in-mill-en.js" %}'></script>
+        <script src='{% static "assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-au-mill-en.js" %}'></script>
+        <script src='{% static "assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-il-chicago-mill-en.js" %}'></script>
+        <script src='{% static "assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-uk-mill-en.js" %}'></script>
+        <script src='{% static "assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-ca-lcc-en.js" %}'></script>
+        <!-- Init js-->
+        <!-- <script src='{% static "assets/js/pages/vector-maps.init.js" %}'></script> -->
+
+        <script src='{% static "assets/libs/select2/js/select2.min.js" %}'></script>
+        <script src='{% static "assets/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js" %}'></script>
+        <script src='{% static "assets/libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js" %}'></script>
+        <script src='{% static "assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js" %}'></script>
+        <script src='{% static "assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js" %}'></script>
+
+
+        <script src='{% static "assets/js/pages/form-advanced.init.js" %}'></script>
+
+        <!-- dropzone plugin -->
+        <script src='{% static "assets/libs/dropzone/min/dropzone.min.js" %}'></script>
+
+        <!-- init js -->
+        <script src='{% static "assets/js/pages/ecommerce-select2.init.js" %}'></script>
+
+
+
+
+
+        <!-- Required datatable js -->
+        <script src='{% static "assets/libs/datatables.net/js/jquery.dataTables.min.js" %}'></script>
+        <script src='{% static "assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js" %}'></script>
+        <!-- Buttons examples -->
+        <script src='{% static "assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js" %}'></script>
+        <script src='{% static "assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js" %}'></script>
+        <script src='{% static "assets/libs/jszip/jszip.min.js" %}'></script>
+        <script src='{% static "assets/libs/pdfmake/build/pdfmake.min.js" %}'></script>
+        <script src='{% static "assets/libs/pdfmake/build/vfs_fonts.js" %}'></script>
+        <script src='{% static "assets/libs/datatables.net-buttons/js/buttons.html5.min.js" %}'></script>
+        <script src='{% static "assets/libs/datatables.net-buttons/js/buttons.print.min.js" %}'></script>
+        <script src='{% static "assets/libs/datatables.net-buttons/js/buttons.colVis.min.js" %}'></script>
+        <!-- Responsive examples -->
+        <script src='{% static "assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js" %}'></script>
+        <script src='{% static "assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js" %}'></script>
+
+        <!-- Datatable init js -->
+        <script src='{% static "assets/js/pages/datatables.init.js" %}'></script>
+
+
+
+
+
+
+
+
+    </body>
+
+
+</html>

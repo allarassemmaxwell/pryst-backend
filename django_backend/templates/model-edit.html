@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block head_title %}Add Models | {{block.super}}{% endblock head_title %}
+
+
+{% block content %}
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Edit Model</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'main_app:model' %}">Models</a></li>
+                        <li class="breadcrumb-item active">Edit Model</li>
+                    </ol>
+                </div>
+                
+            </div>
+        </div>
+    </div>     
+    <!-- end page title -->
+
+    <div class="checkout-tabs">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-shipping" role="tabpanel" aria-labelledby="v-pills-shipping-tab">
+                                    <div>
+                                        <h4 class="card-title">Model information</h4>
+                                        <p class="card-title-desc">Fill all information below</p>
+
+
+                                        <form class="model-edit-form" method="POST">{% csrf_token %}
+                                          
+                                            <div class="form-group row mb-4">
+                                                <label for="billing-name" class="col-md-2 col-form-label">Name</label>
+                                                <div class="col-md-10">
+                                                    <input name="name" value="{{ data.name }}" type="text" class="form-control" id="billing-name" placeholder="Name">
+                                                </div>
+                                            </div> 
+
+                                            <div class="form-group row mb-4">
+                                                <label class="col-md-2 col-form-label">Brand</label>
+                                                <div class="col-md-10">
+                                                    <select class="form-control select2" title="Country" name="brand_slug">
+                                                        {% for brand in brands %}
+                                                            <option value="{{ brand.slug }}" {% if brand.slug == data.brand.slug %} selected="selected" {% endif %}>{{ brand.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row mb-4">
+                                                <label for="billing-name" class="col-md-2 col-form-label"></label>
+                                                <div class="col-md-12">
+                                                    <button class="btn btn-danger mr-1 waves-effect waves-light">
+                                                        <a href="{% url 'main_app:model-delete' data.slug %}" style="color: white;">Delete Model</a>
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary mr-1 waves-effect waves-light">Add Model</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+
+{% endblock %}

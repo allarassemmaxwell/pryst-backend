@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block head_title %}Add Outlet | {{block.super}}{% endblock head_title %}
+
+
+{% block content %}
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Add Outlet</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'main_app:outlet' %}">Outlets</a></li>
+                        <li class="breadcrumb-item active">Add Outlet</li>
+                    </ol>
+                </div>
+                
+            </div>
+        </div>
+    </div>     
+    <!-- end page title -->
+
+    
+    <div class="checkout-tabs">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="v-pills-shipping" role="tabpanel" aria-labelledby="v-pills-shipping-tab">
+                                <div>
+                                    <h4 class="card-title">Outlet information</h4>
+                                    <p class="card-title-desc">Fill all information below</p>
+                                    <form class="outlet-add-form" method="POST">{% csrf_token %}
+                                    
+                                        <div class="form-group row mb-4">
+                                            <label class="col-md-2 col-form-label">User</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" title="Country" name="user_email">
+                                                    <option value="">Select</option>
+                                                    {% for user in users %}
+                                                        <option value="{{ user.email }}">{{ user.first_name }} {{ user.last_name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-name" class="col-md-2 col-form-label">Name</label>
+                                            <div class="col-md-10">
+                                                <input name="name" type="text" class="form-control" id="billing-name" placeholder="Name">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-4">
+                                            <label class="col-md-2 col-form-label">Category</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" title="Country" name="category_slug">
+                                                    <option value="">Select</option>
+                                                    {% for category in categories %}
+                                                        <option value="{{ category.slug }}">{{ category.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-name" class="col-md-2 col-form-label"></label>
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary mr-1 waves-effect waves-light">Save Outlet</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+
+{% endblock %}

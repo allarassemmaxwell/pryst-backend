@@ -1,0 +1,269 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block head_title %}Profile | {{block.super}}{% endblock head_title %}
+
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Profile</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Profile</li>
+                    </ol>
+                </div>
+                
+            </div>
+        </div>
+    </div>     
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-xl-4">
+            <div class="card overflow-hidden">
+                <div class="bg-soft-primary">
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="text-primary p-3">
+                                <h5 class="text-primary">Welcome Back !</h5>
+                                <!-- <p>It will seem like simplified</p> -->
+                            </div>
+                        </div>
+                        <div class="col-5 align-self-end">
+                            <img src='{% static "assets/images/profile-img.png" %}' alt="" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="avatar-md profile-user-wid mb-4">
+                                {% if userProfile.photo %}
+                                    <img src="{{ userProfile.photo.url }}" alt="" class="img-thumbnail rounded-circle">
+                                {% else %}
+                                <img src='{% static "assets/images/users/user.svg" %}' alt="" class="img-thumbnail rounded-circle">
+                                {% endif %}
+                            </div>
+                            <h5 class="font-size-15 text-truncate">{{ userProfile.user.first_name }}</h5>
+                        </div>
+
+                        <div class="col-sm-8">
+                            <div class="pt-4">
+                                
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h5 class="font-size-15">{{ user_outlet }}</h5>
+                                        <p class="text-muted mb-0">My Outlets</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <h5 class="font-size-15">{{ user_audit }}</h5>
+                                        <p class="text-muted mb-0">My Audits</p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end card -->
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Personal Information</h4>
+
+                    <div class="table-responsive">
+                        <table class="table table-nowrap mb-0">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">First Name :</th>
+                                    {% if userProfile.user.first_name %}
+                                        <td>{{ userProfile.user.first_name }}</td>
+                                    {% else %}
+                                        <td>Not defined</td>
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    <th scope="row">Last Name :</th>
+                                    {% if userProfile.user.last_name %}
+                                        <td>{{ userProfile.user.last_name }}</td>
+                                    {% else %}
+                                        <td>Not defined</td>
+                                    {% endif %}
+                                </tr>
+                                <tr>
+                                    <th scope="row">E-mail :</th>
+                                    <td>{{ userProfile.user.email }}</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Location :</th>
+                                    {% if userProfile.county %}
+                                        <td>{{ userProfile.county }}</td>
+                                    {% else %}
+                                        <td>Not defined</td>
+                                    {% endif %}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- end card -->
+        </div>         
+        
+        <div class="col-xl-8">
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card mini-stats-wid">
+                        <div class="card-body">
+                            <div class="media">
+                                <div class="media-body">
+                                    <p class="text-muted font-weight-medium">Users</p>
+                                    <h4 class="mb-0">{{ total_user }}</h4>
+                                </div>
+
+                                <div class="avatar-sm align-self-center mini-stat-icon rounded-circle bg-primary">
+                                    <span class="avatar-title">
+                                        <i class="bx bx-user font-size-24"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card mini-stats-wid">
+                        <div class="card-body">
+                            <div class="media">
+                                <div class="media-body">
+                                    <p class="text-muted font-weight-medium">Outlets</p>
+                                    <h4 class="mb-0">{{ total_outlet }}</h4>
+                                </div>
+
+                                <div class="mini-stat-icon avatar-sm align-self-center rounded-circle bg-primary">
+                                    <span class="avatar-title">
+                                        <i class="bx bx-fridge font-size-24"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="col-md-3">
+                    <div class="card mini-stats-wid">
+                        <div class="card-body">
+                            <div class="media">
+                                <div class="media-body">
+                                    <p class="text-muted font-weight-medium">Products</p>
+                                    <h4 class="mb-0">{{ total_product }}</h4>
+                                </div>
+
+                                <div class="mini-stat-icon avatar-sm align-self-center rounded-circle bg-primary">
+                                    <span class="avatar-title">
+                                        <i class="bx bx-package font-size-24"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card mini-stats-wid">
+                        <div class="card-body">
+                            <div class="media">
+                                <div class="media-body">
+                                    <p class="text-muted font-weight-medium">Audits</p>
+                                    <h4 class="mb-0">{{ total_audit }}</h4>
+                                </div>
+
+                                <div class="avatar-sm align-self-center mini-stat-icon rounded-circle bg-primary">
+                                    <span class="avatar-title">
+                                        <i class="bx bx-data font-size-24"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">My last Outlets</h4>
+                    <div class="table-responsive">
+                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                                
+                                {% for outlet in list_of_my_outlets %}
+                                    <tr>
+                                        <th scope="row">{{ outlet.outlet_id }}</th>
+                                        <td>{{ outlet.name }}</td>
+                                        <td>{{ outlet.category }}</td>
+                                        <td>{{ outlet.created_at|date:"F j, Y" }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">My last Audits</h4>
+                    <div class="table-responsive">
+                        <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                            <tr>
+                                <th scope="col">Outlet</th>
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Measure</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for audit in list_of_my_audits %}
+                                <tr>
+                                    <th scope="row">{{ audit.outlet.name }}</th>
+                                    <td>{{ audit.product.name }}</td>
+                                    <td>{{ audit.price}}</td>
+                                    <td>{{ audit.measure }}</td>
+                                    <td>{{ audit.created_at|date:"F j, Y" }}</td>
+                                </tr>
+                                {% endfor %}
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+        
+{% endblock %}

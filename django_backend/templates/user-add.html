@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block head_title %}Add User | {{block.super}}{% endblock head_title %}
+
+
+{% block content %}
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Add User</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'main_app:users-list' %}">Users</a></li>
+                        <li class="breadcrumb-item active">Add User</li>
+                    </ol>
+                </div>
+                
+            </div>
+        </div>
+    </div>     
+    <!-- end page title -->
+
+
+
+
+
+    <div class="checkout-tabs">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="v-pills-shipping" role="tabpanel" aria-labelledby="v-pills-shipping-tab">
+                                <div>
+                                    <h4 class="card-title">User information</h4>
+                                    <p class="card-title-desc">Fill all information below</p>
+                                    <form class="user-add-form" method="POST">{% csrf_token %}
+
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-name" class="col-md-2 col-form-label">First Name</label>
+                                            <div class="col-md-10">
+                                                <input id="first_name" name="first_name" type="text" class="form-control" placeholder="First Name">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-name" class="col-md-2 col-form-label">Last Name</label>
+                                            <div class="col-md-10">
+                                                <input id="last_name" name="last_name" type="text" class="form-control" placeholder="Last Name">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-name" class="col-md-2 col-form-label">Email</label>
+                                            <div class="col-md-10">
+                                                <input id="email" name="email" type="email" class="form-control" placeholder="Email">
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="form-group row mb-4">
+                                            <label class="col-md-2 col-form-label">County</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" name="county_slug" required>
+                                                    <option value="">Select</option>
+                                                    {% for county in counties %}
+                                                        <option value="{{ county.slug }}">{{ county.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-4">
+                                            <label class="col-md-2 col-form-label">Admin</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control" name="admin" required>
+                                                    <option value="">Select</option>
+                                                    <option value="True">Yes</option>
+                                                    <option value="False">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-4">
+                                            <label class="col-md-2 col-form-label">Active</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control" name="active" required>
+                                                    <option value="">Select</option>
+                                                    <option value="True">Yes</option>
+                                                    <option value="False">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-name" class="col-md-2 col-form-label">Password</label>
+                                            <div class="col-md-10">
+                                                <input id="password1" name="password1" type="password" class="form-control" placeholder="Password">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-name" class="col-md-2 col-form-label">Confirm Password</label>
+                                            <div class="col-md-10">
+                                                <input id="productname" name="password2" type="password" class="form-control" placeholder="Confirm Password">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-name" class="col-md-2 col-form-label"></label>
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary mr-1 waves-effect waves-light">Add User</button> 
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+
+{% endblock %}

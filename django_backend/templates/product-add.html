@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block head_title %}Product Add | {{block.super}}{% endblock head_title %}
+
+
+{% block content %}
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Add Product</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'main_app:product' %}">Products</a></li>
+                        <li class="breadcrumb-item active">Add Product</li>
+                    </ol>
+                </div>
+                
+            </div>
+        </div>
+    </div>     
+    <!-- end page title -->
+
+
+
+    <div class="checkout-tabs">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="v-pills-shipping" role="tabpanel" aria-labelledby="v-pills-shipping-tab">
+                                <div>
+                                    <h4 class="card-title">Product Information information</h4>
+                                    <p class="card-title-desc">Fill all information below</p>
+                                    <form class="product-add-form" method="POST">{% csrf_token %}
+
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-name" class="col-md-2 col-form-label">Name</label>
+                                            <div class="col-md-10">
+                                                <input id="productname" name="name" type="text" class="form-control" placeholder="Name">
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="form-group row mb-4">
+                                            <label class="col-md-2 col-form-label">Category</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" name="category_slug">
+                                                    <option value="">Select</option>
+                                                    {% for category in productCategories %}
+                                                        <option value="{{ category.slug }}">{{ category.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row mb-4">
+                                            <label class="col-md-2 col-form-label">Model</label>
+                                            <div class="col-md-10">
+                                                <select class="form-control select2" name="model_slug">
+                                                    <option value="">Select</option>
+                                                    {% for model in models %}
+                                                        <option value="{{ model.slug }}">{{ model.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                       
+
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-name" class="col-md-2 col-form-label">Manufacturer</label>
+                                            <div class="col-md-10">
+                                                <input id="manufacturer" name="manufacturer" type="text" class="form-control" placeholder="Manufacturer">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-name" class="col-md-2 col-form-label">Measure</label>
+                                            <div class="col-md-10">
+                                                <input id="measure" name="measure" type="text" class="form-control" placeholder="Measure">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-name" class="col-md-2 col-form-label">Content</label>
+                                            <div class="col-md-10">
+                                                <textarea class="form-control" id="productdesc" name="content" rows="5"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-4">
+                                            <label for="billing-name" class="col-md-2 col-form-label"></label>
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary mr-1 waves-effect waves-light">Add Product</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+
+    
+{% endblock %}

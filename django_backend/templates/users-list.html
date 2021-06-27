@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block head_title %}Users list | {{block.super}}{% endblock head_title %}
+
+
+{% block content %}
+
+
+    <!-- start page title -->
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-flex align-items-center justify-content-between">
+                <h4 class="mb-0 font-size-18">Users List</h4>
+
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Users List</li>
+                    </ol>
+                </div>
+                
+            </div>
+        </div>
+    </div>     
+    <!-- end page title -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <div class="search-box mr-2 mb-2 d-inline-block">
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="text-sm-right">
+                                <a href="{% url 'main_app:add-user' %}">
+                                    <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 mr-2"><i class="mdi mdi-plus mr-1"></i> Add User</button>
+                                </a>
+                                
+                            </div>
+                        </div><!-- end col-->
+                    </div>
+
+
+                    
+                    <div class="table-responsive">
+                        <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                            <tr>
+                                <th scope="col" style="width: 70px;">Photo</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Active</th>
+                                <th scope="col">County</th>
+                                <th scope="col">Outlet</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td>
+                                        {% if user.photo %}
+                                            <div class="team">
+                                                <a href="{% url 'main_app:user-edit' user.slug %}" class="team-member d-inline-block" data-toggle="tooltip" data-placement="top" title="" data-original-title="Daniel Canales">
+                                                    <img src="{{ user.photo.url }}" class="rounded-circle avatar-xs m-1" alt="">
+                                                </a>
+                                            </div>
+                                        {% else %}
+                                            <div class="avatar-xs">
+                                                <span class="avatar-title rounded-circle">
+                                                    <a href="{% url 'main_app:user-edit' user.slug %}" style="color: white;">
+                                                        {{ user.user.first_name|make_list|first|upper }} {{ user.user.last_name|make_list|first|upper }}
+                                                    </a>
+                                                </span>
+                                            </div>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <h5 class="font-size-14 mb-1">
+                                            {% if user.user.first_name %}
+                                                <a href="{% url 'main_app:user-edit' user.slug %}" class="text-dark">{{ user.user.first_name|capfirst }}</a>
+                                            {% else %}
+                                                <a href="{% url 'main_app:user-edit' user.slug %}" class="text-dark">Not defined</a>
+                                            {% endif %}
+                                        </h5>
+                                    </td>
+                                    <td>
+                                        {% if user.user.last_name %}
+                                            <a href="{% url 'main_app:user-edit' user.slug %}" class="text-dark">{{ user.user.last_name|capfirst }}</a>
+                                        {% else %}
+                                            Not defined
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'main_app:user-edit' user.slug %}" class="text-dark">{{ user.user.email }}</a>
+                                    </td> 
+                                    <td>
+                                        {% if user.user.is_active %}
+                                            <span class="badge badge-pill badge-soft-success font-size-12">Active</span> 
+                                        {% else %}
+                                            <span class="badge badge-pill badge-soft-danger font-size-12">Not Active</span> 
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <div>
+                                            {% if user.county %}
+                                                {{ user.county }}
+                                            {% else %}
+                                                Not defined
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{ user.user_outlet.count }}
+                                    </td>
+                                    <td>{{ user.created_at|date:"F j, Y" }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-horizontal font-size-18"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="{% url 'main_app:user-edit' user.slug %}" class="dropdown-item"><i class="fas fa-pencil-alt text-success mr-1"></i>Edit</a>
+                                                <a href="{% url 'main_app:user-actif-inactif' user.slug %}" class="dropdown-item">
+                                                    {% if user.user.is_active %}
+                                                        <i class="fas fa-edit text-danger mr-1"> Inactive</i>
+                                                    {% else %}
+                                                        <i class="fas fa-edit text-success mr-1"> Active</i>
+                                                    {% endif %}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>    
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+        
+
+{% endblock %}
+
